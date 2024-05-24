@@ -1,0 +1,97 @@
+.app-container {
+  margin: 30px
+}
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  padding: 10px;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  margin-left: 20px;
+  font-size: 20px;
+  height: 40px;
+  width: 15%;
+  background-color: #131313;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #afafaf;
+  color: rgb(0, 0, 0);
+}
+
+
+.table-container {
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f2f2f2;
+}
+
+.action-button {
+  width: 60px;
+  height: 25px;
+  font-size: 15px;
+}
+
+.delete-button {
+  margin-top: 10px;
+  width: 100px;
+  height: 40px;
+  font-size: 15px;
+  border-radius: 3px;
+  background-color: rgb(255, 55, 55);
+}
+
+.page-button {
+  width: 50px;
+  height: 25px;
+  font-size: 15px;
+  border-radius: 15px;
+  background-color: rgb(11, 59, 204);
+}
+
+.paginator {
+  display: flex;
+  flex-direction: row;
+}
+
+.page-active {
+  width: 50px;
+  height: 25px;
+  font-size: 15px;
+  border-radius: 10px;
+  background-color: rgb(44, 97, 255);
+}
+.pagination-container {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.greyish{
+  background-color: #dddddd;
+}
