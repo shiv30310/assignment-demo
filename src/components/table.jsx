@@ -5,7 +5,6 @@ import Pagination from "./pagination"
 const Table = () => {
     const [rows, setRows] = useState([])
     const [state, dispatch] = useContext(Context)
-    const [searchWord, setSearchWord] = useState("")
     const [edit, setEdit] = useState({
         state: false,
         idx: 0
@@ -40,13 +39,12 @@ const Table = () => {
     }, [currentPage])
 
     const handleChange = (event) => {
-      setSearchWord(event.target.value);
+      let searchWord = event.target.value
       const searchedRows = rows.filter((row) => 
         row.email.toLowerCase().includes(searchWord.toLowerCase()) ||
         row.name.toLowerCase().includes(searchWord.toLowerCase()) ||
         row.role.toLowerCase().includes(searchWord.toLowerCase()) 
     )
-
     
     const searchBar = document.querySelector('.search-input')
     if (searchBar.value === '') {
@@ -126,10 +124,9 @@ const Table = () => {
         <>
             <div className="search-container">
                 <input
-                    type="text"
+                    type="search"
                     className="search-input"
                     placeholder="Search by name, email and role"
-                    value={searchWord}
                     onChange={handleChange}
                 />
             </div>
