@@ -11,13 +11,6 @@ const Table = () => {
     })
     const [currentPage, setCurrentPage] = useState(1)
 
-    const [changeData, setChangeData] = useState({
-        id: 0,
-        email: '',
-        name: '',
-        role: ''
-    })
-
     let selected = []
     const handleCheckbox = (event,id) => {
         
@@ -59,30 +52,28 @@ const Table = () => {
         })
     }
 
-    const handleEdit = (id, email, role, name) => {
+    const handleEdit = (id) => {
         
-        console.log(email,role, name, 'handleEdit')
-        setChangeData({
-            id: id,
-            email: email,
-            name: name,
-            role: role
-        })
         setEdit({
             state: true,
             idx: id
         })
-        console.log(id)
     }
 
-    const handleSave = () => {
+    const handleSave = (id) => {
+
+        const email = document.querySelector(`.email${id}`)
+        const name =  document.querySelector(`.name${id}`)
+        const role = document.querySelector(`.role${id}`)
+        
+        console.log(email, name, role)
         try {
             dispatch({
                 type: 'modify',
-                id: changeData.id,
-                email: changeData.email,
-                role: changeData.role,
-                name: changeData.name
+                id: id,
+                email: email.textContent,
+                role: name.textContent,
+                name: role.textContent
             })
             setEdit({
                 state: false,
@@ -91,12 +82,10 @@ const Table = () => {
         } catch (error) {
             console.log(error, 'Error in Save')
         }
-        
     }
 
     const deleteSelected = () => {
         let selectAllCheckbox = document.querySelector('.selectAll');
-
         if(selectAllCheckbox.checked){
             dispatch({
                 type: 'delete selected',
@@ -109,13 +98,9 @@ const Table = () => {
     const handleSelectAll = () => {
             let selectAllCheckbox = document.querySelector('.selectAll');
             let rowCheckboxes = document.querySelectorAll('.rowCheckbox');
-
-            console.log(selectAllCheckbox, rowCheckboxes)
-
             rowCheckboxes.forEach(function(checkbox) {
                 checkbox.checked = selectAllCheckbox.checked;
             });
-
     }
 
     return (
@@ -156,17 +141,17 @@ const Table = () => {
                                 <td >
                                     <input type="checkbox"  className="rowCheckbox" onChange={(event) => handleCheckbox(event, row.id)} />
                                 </td>
-                                <td contentEditable={edit.idx == row.id ? true : false}> {row.name} </td>
-                                <td contentEditable={edit.idx == row.id ? true : false}> {row.email}</td>
-                                <td contentEditable={edit.idx == row.id ? true : false}> {row.role} </td>
-                                <td>``
+                                <td className={`name${row.id}`} contentEditable={edit.idx == row.id ? true : false} > {row.name} </td>
+                                <td className={`email${row.id}`} contentEditable={edit.idx == row.id ? true : false}> {row.email}</td>
+                                <td className={`role${row.id}`} contentEditable={edit.idx == row.id ? true : false}> {row.role} </td>
+                                <td>
                                     <button className="action-button" onClick={() => handleDelete(row.email)}>
                                         delete
                                     </button>
                                     {edit.idx == row.id ?
-                                    <button className="action-button" onClick={() => handleSave()}>
+                                    <button className="action-button" onClick={() => handleSave(row.id)}>
                                     save </button>:
-                                        <button className="action-button" onClick={() => handleEdit(row.id, row.email, row.role, row.name)}>
+                                        <button className="action-button" onClick={() => handleEdit(row.id)}>
                                         edit </button>
                                         
                                     }
