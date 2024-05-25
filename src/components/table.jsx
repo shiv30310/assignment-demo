@@ -13,15 +13,16 @@ const Table = () => {
 
     let selected = []
     const handleCheckbox = (event, id) => {
-        
+
         if (event.target.checked) {
             selected.push(id)
-            const checkBoxElement = document.getElementsByClassName(`body ${id}`)
-            checkBoxElement.className = `body ${id} greyish`
+            const checkBoxElement = document.querySelector(`.row${id}`)
+            checkBoxElement.className = `row${id} greyish`
+
         } else {
             selected.splice(selected.indexOf(id), 1)
-            const checkBoxElement = document.getElementsByClassName(`body ${id} greyish`)
-            checkBoxElement.className = `body ${id}`
+            const checkBoxElement = document.getElementById(`${id}`)
+            checkBoxElement.className = `row${id}`
         }
     }
     
@@ -145,7 +146,7 @@ const Table = () => {
                     <tbody>
                         {rows.map((row) =>
                              
-                            <tr className={`body ${row.id}`} key={row.id}>
+                            <tr className={`row${row.id}`} id={row.id} key={row.id}>
                                 <td >
                                     <input type="checkbox"  className="rowCheckbox" onChange={(event) => handleCheckbox(event, row.id)} />
                                 </td>
