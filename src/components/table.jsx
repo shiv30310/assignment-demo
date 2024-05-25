@@ -20,8 +20,6 @@ const Table = () => {
 
     let selected = []
     const handleCheckbox = (event,id) => {
-
-        
         
         if (event.target.checked) {
             selected.push(id)
@@ -158,10 +156,10 @@ const Table = () => {
                                 <td >
                                     <input type="checkbox"  className="rowCheckbox" onChange={(event) => handleCheckbox(event, row.id)} />
                                 </td>
-                                <td>{edit.idx == row.id ? <input value={changeData.name} onChange={(event) => setChangeData({'name': event.target.value})}/> : row?.name}</td>
-                                <td>{edit.idx  == row.id ? <input value={changeData.email} onChange={(event) => setChangeData({'email': event.target.value})}/> : row?.email}</td>
-                                <td>{edit.idx == row.id ? <input value={changeData.role} onChange={(event) => setChangeData({'role': event.target.value})}/> : row?.role}</td>
-                                <td>
+                                <td contentEditable={edit.idx == row.id ? true : false}> {row.name} </td>
+                                <td contentEditable={edit.idx == row.id ? true : false}> {row.email}</td>
+                                <td contentEditable={edit.idx == row.id ? true : false}> {row.role} </td>
+                                <td>``
                                     <button className="action-button" onClick={() => handleDelete(row.email)}>
                                         delete
                                     </button>
