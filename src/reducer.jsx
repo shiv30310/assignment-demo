@@ -6,11 +6,13 @@ export const initialRows = initial
 export const dataReducer = (state, action) => {
     switch(action.type) {
         case "delete":
-            return state.filter((row) => 
-            row.email != action.email)
+            return (
+                 state.filter((row) => 
+                    row.id !== action.id)
+            )
         
         case "modify":
-            return (
+            return(
                 state.map((row) => {
                     if(row.id === action.id){
                         row.email = action.email === ''? row.email :  action.email;

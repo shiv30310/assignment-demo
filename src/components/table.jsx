@@ -27,7 +27,7 @@ const Table = () => {
     
     useEffect(() => {
         setRows(state.slice(currentPage*10, (currentPage+1)*10))
-    }, [currentPage])
+    }, [currentPage, state])
 
     const handleChange = (event) => {
       let searchWord = event.target.value
@@ -45,10 +45,10 @@ const Table = () => {
     }
     };
 
-    const handleDelete = (email) => {
+    const handleDelete = (id) => {
         dispatch({
                 type: "delete",
-                email: email
+                id: id
         })
     }
 
@@ -145,7 +145,7 @@ const Table = () => {
                                 <td className={`email${row.id}`} contentEditable={edit.idx == row.id ? true : false}> {row.email}</td>
                                 <td className={`role${row.id}`} contentEditable={edit.idx == row.id ? true : false}> {row.role} </td>
                                 <td>
-                                    <button className="action-button" onClick={() => handleDelete(row.email)}>
+                                    <button className="action-button" onClick={() => handleDelete(row.id)}>
                                         delete
                                     </button>
                                     {edit.idx == row.id ?
