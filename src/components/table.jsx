@@ -12,7 +12,7 @@ const Table = () => {
     const [currentPage, setCurrentPage] = useState(1)
 
     let selected = []
-    const handleCheckbox = (event,id) => {
+    const handleCheckbox = (event, id) => {
         
         if (event.target.checked) {
             selected.push(id)
@@ -46,14 +46,17 @@ const Table = () => {
     };
 
     const handleDelete = (id) => {
-        dispatch({
+        try {
+            dispatch({
                 type: "delete",
                 id: id
         })
+        } catch(error) {
+            console.log(error)
+        }
     }
 
     const handleEdit = (id) => {
-        
         setEdit({
             state: true,
             idx: id
@@ -86,13 +89,18 @@ const Table = () => {
 
     const deleteSelected = () => {
         let selectAllCheckbox = document.querySelector('.selectAll');
-        if(selectAllCheckbox.checked){
-            dispatch({
-                type: 'delete selected',
-                start: currentPage*10,
-                end: (currentPage+1)*10
-            })
+        try {
+            if(selectAllCheckbox.checked){
+                dispatch({
+                    type: 'delete selected',
+                    start: currentPage*10,
+                    end: (currentPage+1)*10
+                })
+            }
+        } catch (error) {
+            console.log(error)
         }
+        
     }
 
     const handleSelectAll = () => {
