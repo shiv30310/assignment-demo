@@ -107,10 +107,21 @@ const Table = () => {
     const handleSelectAll = () => {
             let selectAllCheckbox = document.querySelector('.selectAll');
             let rowCheckboxes = document.querySelectorAll('.rowCheckbox');
-            rowCheckboxes.forEach(function(checkbox) {
-                checkbox.checked = selectAllCheckbox.checked;
-            });
-    }
+            if(selectAllCheckbox.checked){
+                rowCheckboxes.forEach(function(checkbox) {
+                    checkbox.checked = selectAllCheckbox.checked;
+                    let rowEl = checkbox.parentElement.parentElement
+                    rowEl.className = `row${rowEl.id} greyish`
+                });
+              }
+            else {
+                rowCheckboxes.forEach(function(checkbox) {
+                    checkbox.checked = selectAllCheckbox.checked;
+                    let rowEl = checkbox.parentElement.parentElement
+                    rowEl.className = `row${rowEl.id}`
+                });
+            }}
+            
 
     return (
         <>
