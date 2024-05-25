@@ -93,9 +93,14 @@ const Table = () => {
         try {
             if(selectAllCheckbox.checked){
                 dispatch({
-                    type: 'delete selected',
+                    type: 'delete all',
                     start: currentPage*10,
                     end: (currentPage+1)*10
+                })
+            } else {
+                dispatch({
+                    type: "delete selected",
+                    selectedRows: selected
                 })
             }
         } catch (error) {
