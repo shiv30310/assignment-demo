@@ -73,16 +73,21 @@ const Table = () => {
     }
 
     const handleSave = () => {
-        dispatch({
-            type: 'modify',
-            email: changeData.email,
-            role: changeData.role,
-            name: changeData.name
-        })
-        setEdit({
-            state: false,
-            idx: 0
-        })
+        try {
+            dispatch({
+                type: 'modify',
+                email: changeData.email,
+                role: changeData.role,
+                name: changeData.name
+            })
+            setEdit({
+                state: false,
+                idx: 0
+            })
+        } catch {
+            console.log('Error in Save')
+        }
+        
     }
 
     const deleteSelected = () => {
