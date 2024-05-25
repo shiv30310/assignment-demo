@@ -23,14 +23,13 @@ export const dataReducer = (state, action) => {
                 })
             )
         case "delete all":
-            return (
-                state.filter((row) => {
-                    if (action.start <= row.id <= action.end) {
-                        return false
-                    }
-                    return true
-                })
-            )
+            return (state.filter((row) => {
+                if (row.id >= action.start && row.id <= action.end) {
+                    return false
+                }
+                return true
+                
+            }))
             case "delete selected":
             return (
                 state.filter((row) => {

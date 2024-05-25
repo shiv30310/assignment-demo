@@ -94,8 +94,8 @@ const Table = () => {
             if(selectAllCheckbox.checked){
                 dispatch({
                     type: 'delete all',
-                    start: currentPage*10,
-                    end: (currentPage+1)*10
+                    start: rows[0].id,
+                    end: rows[9].id
                 })
             } else {
                 dispatch({
@@ -111,7 +111,8 @@ const Table = () => {
 
     const handleSelectAll = () => {
             let selectAllCheckbox = document.querySelector('.selectAll');
-            let rowCheckboxes = document.querySelectorAll('.rowCheckbox');
+            let rowCheckboxes = document.querySelectorAll('.rowCheckbox')
+
             if(selectAllCheckbox.checked){
                 rowCheckboxes.forEach(function(checkbox) {
                     checkbox.checked = selectAllCheckbox.checked;
