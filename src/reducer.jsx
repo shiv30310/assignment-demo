@@ -12,11 +12,12 @@ export const dataReducer = (state, action) => {
         case "modify":
             return (
                 state.map((row) => {
-                    if(row.email == action.email){
+                    if(row.id === action.id){
                         row.email = action.email === ''? row.email :  action.email;
                         row.role = action.role === '' ? row.role: action.role;
                         row.name = action.name === '' ? row.name : action.name
                     }
+                    return row
                 })
             )
         case "delete selected":

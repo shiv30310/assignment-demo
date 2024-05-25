@@ -13,6 +13,7 @@ const Table = () => {
     const [currentPage, setCurrentPage] = useState(1)
 
     const [changeData, setChangeData] = useState({
+        id: 0,
         email: '',
         name: '',
         role: ''
@@ -40,14 +41,19 @@ const Table = () => {
 
     const handleChange = (event) => {
       setSearchWord(event.target.value);
-    };
-  
-    const handleSearch = (searchKeyword) => {
-      rows.filter((row) => {
-        row.email.toLowerCase.includes(searchKeyword.toLowerCase) &&
-        row.name.toLowerCase.includes(searchKeyword.toLowerCase) &&
-        row.role.toLowerCase.includes(searchKeyword.toLowerCase) 
-    })
+      const searchedRows = rows.filter((row) => 
+        row.email.toLowerCase().includes(searchWord.toLowerCase()) ||
+        row.name.toLowerCase().includes(searchWord.toLowerCase()) ||
+        row.role.toLowerCase().includes(searchWord.toLowerCase()) 
+    )
+
+    
+    const searchBar = document.querySelector('.search-input')
+    if (searchBar.value === '') {
+        setRows(state.slice(currentPage*10, (currentPage+1)*10))
+    } else {
+        setRows(searchedRows)
+    }
     };
 
     const handleDelete = (email) => {
@@ -61,6 +67,7 @@ const Table = () => {
         
         console.log(email,role, name, 'handleEdit')
         setChangeData({
+            id: id,
             email: email,
             name: name,
             role: role
@@ -76,6 +83,7 @@ const Table = () => {
         try {
             dispatch({
                 type: 'modify',
+                id: changeData.id,
                 email: changeData.email,
                 role: changeData.role,
                 name: changeData.name
@@ -84,8 +92,8 @@ const Table = () => {
                 state: false,
                 idx: 0
             })
-        } catch {
-            console.log('Error in Save')
+        } catch (error) {
+            console.log(error, 'Error in Save')
         }
         
     }
@@ -124,9 +132,6 @@ const Table = () => {
                     value={searchWord}
                     onChange={handleChange}
                 />
-                <button className="search-button" onClick={() => handleSearch(searchWord)}>
-                    Search
-                </button>
             </div>
             <div className="table-container">
                 <table className='table'>
